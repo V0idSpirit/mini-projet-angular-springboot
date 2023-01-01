@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="row">
+     <div class="col alert mt-2 bg-primary text-white">
+        <div class="card-title">
+           <h1>Catalogue des PFEs (ESSAT)</h1>
+        </div>
+     </div>
+  </div>
+  <form class="row g-3">
+     <div class="col-auto">
+        <button type="button" class="btn btn-danger" routerLink="add-pfe">Add PFE</button>
+     </div>
+     <div class="col-3">
+        <input type="text" class="form-control" placeholder="Titre du PFE à chercher"
+        [(ngModel)]="searchTerm" [ngModelOptions]="{standalone: true}">
+     </div>
+     <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3" >Chercher un PFE</button>
+     </div>
+  </form>
+  <div class="row">
+     <!-- hna add pfe button , research field & button -->
+  </div>
+  <div class="row" style="font-size: 1rem;">
+     <div class="col-3 ">
+        <div class="list-group">
+           <span ><a href="" class="list-group-item list-group-item-action active fa fa-ge"  aria-current="true">
+           &nbsp;&nbsp;Tous les PFEs&nbsp;&nbsp;
+           <button type="button" class="btn btn-warning btn-sm px-1 py-0" style="border-radius: 15px;">
+           {{ size }} </button></a></span>
+           <span *ngFor="let type of pfeTypeList" clickPreventDefault (click)="typeInput = type.id">
+           <a href="" class="list-group-item list-group-item-action" >
+           <i class="fa fa-gg" >
+           PFE's {{ type.typeName }}
+           <button type="button" class="btn btn-sm px-2 py-0 text-white" style="border-radius: 15px;background-color: #08AFA7;">
+           {{ getCount(type.id) }}
+           </button>
+           </i>
+           </a>
+           </span>
+        </div>
+     </div>
+     <div class="col-9">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <div class="row">
+                    <div class="col-9 ">
+                        Add PFE
+                    </div>
+                <div class="row"></div>
+            </div>
+          </div>
+          <div class="container px-1 mx-1 py-2 my-2">
+            <form>
+              <div class="mb-3 row">
+                <div class="col-sm-2">
+                  <label for="titre" class="form-label">Titre</label>
+                </div>
+                <div class="col">
+                  <input type="text" class="form-control" placeholder="Titre" [(ngModel)]="pfeToBeAdded.titre" [ngModelOptions]="{standalone: true}">
+                </div>
+              </div>
+              <div class="mb-3 row">
+                <div class="col-sm-2">
+                  <label for="type" class="form-label">Type</label>
+                </div>
+                <div class="col">
+                  <select class="form-select" aria-label="type" [(ngModel)]="pfeToBeAdded.id" [ngModelOptions]="{standalone: true}">
+                    <option value="{{ type.id }}" *ngFor="let type of pfeTypeList">{{ type.typeName }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="container px-0 mx-0">
+                <button type="submit" (click)="addPfe()" class="btn btn-primary col-12">Ajouter un PFE</button>
+              </div>
+            </form>
+          </div>
+        </div>
+     </div>
+  </div>
+</div>

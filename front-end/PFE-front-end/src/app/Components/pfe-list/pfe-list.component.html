@@ -1,0 +1,74 @@
+<div class="container">
+  <div class="row">
+     <div class="col alert mt-2 bg-primary text-white">
+        <div class="card-title">
+           <h1>Catalogue des PFEs (ESSAT)</h1>
+        </div>
+     </div>
+  </div>
+  <form class="row g-3">
+     <div class="col-auto">
+        <button type="button" class="btn btn-danger" routerLink="add-pfe">Add PFE</button>
+     </div>
+     <div class="col-3">
+        <input type="text" class="form-control" placeholder="Titre du PFE à chercher"
+        [(ngModel)]="searchTerm" [ngModelOptions]="{standalone: true}">
+     </div>
+     <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3" >Chercher un PFE</button>
+     </div>
+  </form>
+  <div class="row">
+     <!-- hna add pfe button , research field & button -->
+  </div>
+  <div class="row" style="font-size: 1rem;">
+     <div class="col-3 ">
+        <div class="list-group">
+           <span ><a href="" class="list-group-item list-group-item-action active fa fa-ge"  aria-current="true">
+           &nbsp;&nbsp;Tous les PFEs&nbsp;&nbsp;
+           <button type="button" class="btn btn-warning btn-sm px-1 py-0" style="border-radius: 15px;">
+           {{ size }} </button></a></span>
+           <span *ngFor="let type of pfeTypeList" clickPreventDefault (click)="typeInput = type.id">
+           <a href="" class="list-group-item list-group-item-action" >
+           <i class="fa fa-gg" >
+           PFE's {{ type.typeName }}
+           <button type="button" class="btn btn-sm px-2 py-0 text-white" style="border-radius: 15px;background-color: #08AFA7;">
+           {{ getCount(type.id) }}
+           </button>
+           </i>
+           </a>
+           </span>
+        </div>
+     </div>
+     <div class="col-9">
+        <div class="card">
+            <div class="card-header bg-success text-white">
+                <div class="row">
+                    <div class="col-9 ">
+                        Liste des PFE's
+                    </div>
+                <div class="row"></div>
+            </div>
+          </div>
+          <table class="table table-hover">
+            <thead class="bg-light">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Titre</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let pfe of pfeList | pfeTitreFilter:searchTerm | pfeTypeFilter:typeInput">
+                <td> {{ pfe.id }} </td>
+                <td> {{ pfe.titre }} </td>
+                <td> {{ pfe.pfeType.typeName }} </td>
+                <td><a class="btn btn-danger" clickPreventDefault (click)="deletePfe(pfe.id)" >DELETE</a></td>
+              </tr>
+            </tbody>
+        </table>
+        </div>
+     </div>
+  </div>
+</div>
